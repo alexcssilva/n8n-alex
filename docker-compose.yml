@@ -9,7 +9,12 @@ services:
       - N8N_PORT=5678
       - NODE_ENV=production
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
+      - DB_TYPE=postgresdb
       - DB_POSTGRESDB_URL=${DB_POSTGRESDB_URL}
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - WEBHOOK_URL=https://${RAILWAY_STATIC_URL}
+      - N8N_PROTOCOL=https
+      - N8N_HOST=${RAILWAY_STATIC_URL}
     volumes:
       - n8n_data:/home/node/.n8n
 volumes:
