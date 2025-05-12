@@ -15,7 +15,6 @@ services:
       - WEBHOOK_URL=https://${RAILWAY_STATIC_URL}
       - N8N_PROTOCOL=https
       - N8N_HOST=${RAILWAY_STATIC_URL}
-      - DB_POSTGRESDB_PORT=5432
     volumes:
       - n8n_data:/home/node/.n8n
 volumes:
