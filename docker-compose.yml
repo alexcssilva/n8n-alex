@@ -9,13 +9,28 @@ services:
       - N8N_PORT=5678
       - NODE_ENV=production
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
+      # Configuração explícita para DESATIVAR SQLite
+      - DB_SQLITE_DISABLED=true
+      # Configuração completa para PostgreSQL
       - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_URL=${DB_POSTGRESDB_URL}
+      - DB_POSTGRESDB_HOST=postgres.railway.internal
+      - DB_POSTGRESDB_DATABASE=railway
+      - DB_POSTGRESDB_USER=postgres
+      - DB_POSTGRESDB_PASSWORD=${DB_POSTGRESDB_PASSWORD}
+      - DB_POSTGRESDB_PORT=5432
+      # Não use DB_POSTGRESDB_URL junto com as configurações individuais acima
+      # - DB_POSTGRESDB_URL=${DB_POSTGRESDB_URL}
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
       - WEBHOOK_URL=https://${RAILWAY_STATIC_URL}
       - N8N_PROTOCOL=https
       - N8N_HOST=${RAILWAY_STATIC_URL}
     volumes:
       - n8n_data:/home/node/.n8n
+    # Comando personalizado para iniciar
+    command: >
+      /bin/sh -c "
+      echo 'Conectando ao PostgreSQL em postgres.railway.internal:5432...' &&
+      n8n start
+      "
 volumes:
   n8n_data:
