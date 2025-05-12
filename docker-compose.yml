@@ -8,7 +8,8 @@ services:
     environment:
       - N8N_PORT=5678
       - NODE_ENV=production
-      - N8N_ENCRYPTION_KEY=chave-secreta-123
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
+      - DB_POSTGRESDB_URL=${DB_POSTGRESDB_URL}
     volumes:
       - n8n_data:/home/node/.n8n
 volumes:
