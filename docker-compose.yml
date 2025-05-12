@@ -9,23 +9,18 @@ services:
       - NODE_ENV=production
       - N8N_PORT=5678
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
-      - DB_TYPE=postgresdb
-      - DB_SQLITE_DISABLED=true
-      - DB_POSTGRESDB_HOST=postgres.railway.internal
-      - DB_POSTGRESDB_PORT=5432
-      - DB_POSTGRESDB_DATABASE=railway
-      - DB_POSTGRESDB_USER=postgres
+      - DB_TYPE=${DB_TYPE}
+      - DB_SQLITE_DISABLED=${DB_SQLITE_DISABLED}
+      - DB_POSTGRESDB_HOST=${DB_POSTGRESDB_HOST}
+      - DB_POSTGRESDB_PORT=${DB_POSTGRESDB_PORT}
+      - DB_POSTGRESDB_DATABASE=${DB_POSTGRESDB_DATABASE}
+      - DB_POSTGRESDB_USER=${DB_POSTGRESDB_USER}
       - DB_POSTGRESDB_PASSWORD=${DB_POSTGRESDB_PASSWORD}
-      - WEBHOOK_URL=https://${RAILWAY_STATIC_URL}
       - N8N_PROTOCOL=https
       - N8N_HOST=${RAILWAY_STATIC_URL}
-      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - WEBHOOK_URL=https://${RAILWAY_STATIC_URL}
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=${N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS}
     volumes:
       - n8n_data:/home/node/.n8n
-    command: >
-      /bin/sh -c "
-      echo 'Conectando ao PostgreSQL em postgres.railway.internal:5432...' &&
-      n8n start
-      "
 volumes:
   n8n_data:
